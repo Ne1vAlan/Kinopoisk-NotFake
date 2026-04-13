@@ -27,8 +27,8 @@ The project was created using Angular + Django + CSS + HTML
 
 ```
 Kinopoisk-NotFake/
-├──
-│
+├── Backend/
+├── Frontend/
 │
 │
 └── README.md
