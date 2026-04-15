@@ -28,7 +28,21 @@ The project was created using Angular + Django + CSS + HTML
 ```
 Kinopoisk-NotFake/
 ├── Backend/
+│   ├── config/
+│   │     ├── settings.py
+│   │     └── urls.py
+│   ├── movies/
+│   │   ├── migrations/
+│   │   ├── admin.py
+│   │   ├── serializers.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   └── manage.py
+│
 ├── Frontend/
+│   └── src/app/
+│           ├── login/
+│
 │
 │
 └── README.md

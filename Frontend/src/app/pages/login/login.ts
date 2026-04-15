@@ -1,3 +1,4 @@
+//--------------------Alan---------------------------
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -6,6 +7,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.html',
+  styleUrl: './login.css',
   imports: [FormsModule],
 })
 export class LoginComponent {
@@ -26,3 +28,4 @@ export class LoginComponent {
     });
   }
 }
+//--------------------Alan---------------------------
