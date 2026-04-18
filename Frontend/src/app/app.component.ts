@@ -4,8 +4,13 @@ import { Navbar } from './components/navbar/navbar';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, Navbar],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  template: `
+    <app-navbar></app-navbar>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  `
 })
-export class App {}
+export class AppComponent {}

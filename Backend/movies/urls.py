@@ -1,22 +1,25 @@
 from django.urls import path
-#Alans
-from .views import TestAuthView
+from .views import (
+    RegisterAPIView,
+    LoginAPIView,
+    LogoutAPIView,
+    get_genres,
+    get_reviews,
+    MoviesListCreateAPIView,
+    MovieDetailAPIView,
+    CreateReviewAPIView,
+)
 
 urlpatterns = [
-    path('test/', TestAuthView.as_view()),
-]
+    path('register', RegisterAPIView.as_view()),
+    path('login', LoginAPIView.as_view()),
+    path('logout', LogoutAPIView.as_view()),
 
-from .views import RegisterView
+    path('genres', get_genres),
 
-urlpatterns = [
-    path('test/', TestAuthView.as_view()),
-    path('register/', RegisterView.as_view()),
-]
+    path('movies', MoviesListCreateAPIView.as_view()),
+    path('movies/<int:movie_id>', MovieDetailAPIView.as_view()),
 
-#Yegors
-from .views import MovieListCreateView, MovieDetailView
-
-urlpatterns = [
-    path('movies/', MovieListCreateView.as_view(), name='movie-list-create'),
-    path('movies/<int:pk>/', MovieDetailView.as_view(), name='movie-detail'),
+    path('reviews', get_reviews),
+    path('reviews/create', CreateReviewAPIView.as_view()),
 ]

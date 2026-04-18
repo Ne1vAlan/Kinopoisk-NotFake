@@ -5,13 +5,13 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './login.html',
-  styleUrl: './login.css',
+  templateUrl: './register.html',
+  styleUrl: './register.css',
 })
-export class Login {
+export class Register {
   username = '';
   password = '';
   error = '';
@@ -27,13 +27,13 @@ export class Login {
     this.loading = true;
     this.error = '';
 
-    this.authService.login({ username: this.username, password: this.password }).subscribe({
+    this.authService.register({ username: this.username, password: this.password }).subscribe({
       next: (res) => {
         this.authService.saveToken(res.token, res.username);
         this.router.navigate(['/']);
       },
-      error: () => {
-        this.error = 'Неверный логин или пароль';
+      error: (err) => {
+        this.error = err.error?.username?.[0] || 'Ошибка регистрации';
         this.loading = false;
       }
     });
