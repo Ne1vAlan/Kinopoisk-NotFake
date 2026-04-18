@@ -1,0 +1,36 @@
+<!-- Yerdaulet's part -->
+<div *ngIf="loading">Загрузка...</div>
+
+<div *ngIf="!loading && movie">
+  <h1>{{ movie.title }}</h1>
+  <p>Год: {{ movie.year }}</p>
+  <p>Жанр: {{ movie.genre?.name }}</p>
+  <p>{{ movie.description }}</p>
+  <p>Средний рейтинг: {{ getAvgRating() }} / 10</p>
+
+  <h2>Отзывы ({{ reviews.length }})</h2>
+
+  <div *ngFor="let review of reviews">
+    <strong>{{ review.user }}</strong> — {{ review.rating }}/10
+    <p>{{ review.text }}</p>
+    <small>{{ review.created_at | date:'dd.MM.yyyy' }}</small>
+    <hr>
+  </div>
+
+  <div *ngIf="!reviews.length">
+    <p>Отзывов пока нет</p>
+  </div>
+
+  <h3>Добавить отзыв</h3>
+  <div *ngIf="reviewError" style="color:red">{{ reviewError }}</div>
+  <textarea [(ngModel)]="reviewText" placeholder="Ваш отзыв..." rows="3"></textarea><br>
+  <label>Рейтинг: {{ reviewRating }}</label><br>
+  <input type="range" min="1" max="10" [(ngModel)]="reviewRating"><br>
+  <button (click)="submitReview()" [disabled]="reviewLoading">
+    {{ reviewLoading ? 'Отправка...' : 'Отправить отзыв' }}
+  </button>
+</div>
+
+<div *ngIf="!loading && !movie">
+  <p>Фильм не найден</p>
+</div>
