@@ -58,6 +58,8 @@ cd frontend
 npm install
 
 ng serve
+
+Frontend link http://localhost:4200
 ```
 
 ## Backend
