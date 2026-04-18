@@ -1,29 +1,20 @@
-<!--------------------Alan--------------------------->
-<div class="page">
-  <div class="login-box">
-    <h2 class="title">Login</h2>
-
-    <form (ngSubmit)="onSubmit()">
-      <input
-        type="text"
-        placeholder="Username"
-        [(ngModel)]="username"
-        name="username"
-        required
-      />
-
-      <input
-        type="password"
-        placeholder="Password"
-        [(ngModel)]="password"
-        name="password"
-        required
-      />
-
-      <button type="submit">Login</button>
-    </form>
-
+<!--------------------Alan-------------------------->
+<div class="auth-page">
+  <div class="auth-card">
+    <h2>Войти</h2>
     <p class="error" *ngIf="error">{{ error }}</p>
+    <div class="form-group">
+      <label>Логин</label>
+      <input [(ngModel)]="username" type="text" placeholder="Введите логин" name="username" />
+    </div>
+    <div class="form-group">
+      <label>Пароль</label>
+      <input [(ngModel)]="password" type="password" placeholder="Введите пароль" name="password" />
+    </div>
+    <button class="btn-submit" (click)="onSubmit()" [disabled]="loading">
+      {{ loading ? 'Входим...' : 'Войти' }}
+    </button>
+    <p class="switch-auth">Нет аккаунта? <a routerLink="/register">Зарегистрируйся</a></p>
   </div>
 </div>
-<!--------------------Alan--------------------------->
+<!--------------------Alan-------------------------->
