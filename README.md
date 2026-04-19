@@ -8,7 +8,7 @@ The project was created using Angular + Django + CSS + HTML
 
 | Name     | Role                  | Responsibilities Back/Front |
 |----------|----------------------|------------------|
-| Alan | Team Lead / Full-Stack | JWT authorization (login/register),User (Django User), Setting up DRF + CORS **/** Login page,Logout, Auth service (token storage), Interceptor (substitutes a token) |
+| Alan | Team Lead / Full-Stack | JWT authorization (login/register),User (Django User), Setting up DRF + CORS **/** Login page,Logout, Auth service (token storage), Interceptor (substitutes a token), Auth Guard, Profile (User Info) |
 | Yegor    | Full-Stack           | The Movie Model(title, description, year, genre (FK)), (GET /, POST, DELETE , PUT /movies/) **/** Movies list page, (Buttons: Load movies, Add movie, Delete movie) |
 | Yerdaulet   | Full-Stack           | Genre: name. Review: text, rating, movie (FK), user (FK). API: GET /reviews?movie_id=, POST /reviews, GET /genres **/** Movie details page. Screening: information about the film , a list of reviews. Button: Add review |
 

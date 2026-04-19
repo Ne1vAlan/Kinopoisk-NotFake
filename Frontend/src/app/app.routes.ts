@@ -1,5 +1,8 @@
 import { Routes } from '@angular/router';
+//---Alans----
+import { authGuard } from './guards/auth.guard';
 
+// Yerdaulet's and Alan`s 
 export const routes: Routes = [
     {
         path: '',
@@ -8,11 +11,13 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        loadComponent: () => import('./pages/home/home').then(m => m.Home)
+        loadComponent: () => import('./pages/home/home').then(m => m.Home),
+        canActivate: [authGuard]
     },
     {
         path: 'movie/:id',
-        loadComponent: () => import('./pages/movie-detail/movie-detail').then(m => m.MovieDetailComponent)
+        loadComponent: () => import('./pages/movie-detail/movie-detail').then(m => m.MovieDetailComponent),
+        canActivate: [authGuard]
     },
     {
         path: 'login',
@@ -25,5 +30,10 @@ export const routes: Routes = [
     {
         path: '**',
         redirectTo: 'home'
+    },
+    {
+        path: 'profile',
+        loadComponent: () => import('./pages/profile/profile').then(m => m.ProfileComponent),
+        canActivate: [authGuard]
     }
 ];
