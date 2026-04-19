@@ -1,10 +1,24 @@
 import { Routes } from '@angular/router';
 
-// Yerdaulet's part
-import { MovieDetailComponent } from './pages/movie-detail/movie-detail';
-
 export const routes: Routes = [
-  // Yerdaulet's part
-  { path: 'movie/:id', component: MovieDetailComponent },
+    {
+        path: '',
+        loadComponent: () => import('./pages/home/home').then(m => m.Home)
+    },
+    {
+        path: 'movie/:id',
+        loadComponent: () => import('./pages/movie-detail/movie-detail').then(m => m.MovieDetailComponent)
+    },
+    {
+        path: 'login',
+        loadComponent: () => import('./pages/login/login').then(m => m.LoginComponent)
+    },
+    {
+        path: 'register',
+        loadComponent: () => import('./pages/register/register').then(m => m.Register)
+    },
+    {
+        path: '**',
+        redirectTo: ''
+    }
 ];
-

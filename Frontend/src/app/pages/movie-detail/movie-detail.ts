@@ -33,9 +33,20 @@ export class MovieDetailComponent implements OnInit {
     this.movieService.getMovie(id).subscribe({
       next: (data) => {
         this.movie = data;
-        this.reviews = data.reviews || [];
-        this.loading = false;
-        this.cdr.detectChanges();
+        
+        // Fetch reviews independently
+        this.movieService.getReviews(id).subscribe({
+            next: (reviews_data) => {
+                this.reviews = reviews_data;
+                this.loading = false;
+                this.cdr.detectChanges();
+            },
+            error: () => {
+                this.reviews = [];
+                this.loading = false;
+                this.cdr.detectChanges();
+            }
+        });
       },
       error: () => {
         this.loading = false;

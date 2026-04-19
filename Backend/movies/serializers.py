@@ -34,14 +34,12 @@ class GenreModelSerializer(serializers.ModelSerializer):
         model = Genre
         fields = ['id', 'name']
 
-
 class ReviewModelSerializer(serializers.ModelSerializer):
     user = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
         model = Review
         fields = ['id', 'text', 'rating', 'movie', 'user', 'created_at']
-
 
 class ReviewCreateSerializer(serializers.Serializer):
     movie_id = serializers.IntegerField()
@@ -54,11 +52,11 @@ class ReviewCreateSerializer(serializers.Serializer):
         return value
 
     def create(self, validated_data):
-        request = self.context['request']
+        request = self.context.get('request')
         movie = Movie.objects.get(id=validated_data['movie_id'])
         return Review.objects.create(
             movie=movie,
-            user=request.user,
+            user=request.user if request else None,
             text=validated_data['text'],
             rating=validated_data['rating']
         )

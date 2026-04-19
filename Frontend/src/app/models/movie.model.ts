@@ -18,6 +18,6 @@ export interface Movie {
   title: string;
   description: string;
   year: number;
-  genre: Genre;
-  reviews: Review[];
+  genre?: Genre;
+  reviews?: Review[];
 }
