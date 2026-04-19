@@ -1,7 +1,7 @@
-//--------------------Alan---------------------------
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { AuthResponse, LoginRequest, RegisterRequest } from '../models/auth.model';
 
 @Injectable({ providedIn: 'root' })
@@ -11,15 +11,19 @@ export class AuthService {
     constructor(private http: HttpClient) { }
 
     login(data: LoginRequest): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${this.baseUrl}/login`, data);
+        return this.http.post<AuthResponse>(`${this.baseUrl}/login/`, data).pipe(
+            tap(response => {
+                this.saveToken(response.access, data.username);
+            })
+        );
     }
 
     register(data: RegisterRequest): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${this.baseUrl}/register`, data);
+        return this.http.post<AuthResponse>(`${this.baseUrl}/register/`, data);
     }
 
     logout(): Observable<any> {
-        return this.http.post(`${this.baseUrl}/logout`, {});
+        return this.http.post(`${this.baseUrl}/logout/`, {});
     }
 
     saveToken(token: string, username: string): void {
@@ -50,4 +54,3 @@ export class AuthService {
         return '';
     }
 }
-//--------------------Alan---------------------------

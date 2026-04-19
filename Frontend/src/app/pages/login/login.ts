@@ -1,5 +1,5 @@
 //--------------------Alan---------------------------
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -18,7 +18,12 @@ export class LoginComponent {
   error = '';
   loading = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+constructor(
+  private authService: AuthService,
+  private router: Router,
+  private cdr: ChangeDetectorRef   
+) {}
+
 
   onSubmit(): void {
     if (!this.username || !this.password) {
@@ -30,12 +35,20 @@ export class LoginComponent {
 
     this.authService.login({ username: this.username, password: this.password }).subscribe({
       next: (res) => {
-        this.authService.saveToken(res.token, res.username);
-        this.router.navigate(['/']);
-      },
-      error: () => {
-        this.error = 'Неверный логин или пароль';
+        console.log('LOGIN SUCCESS');
         this.loading = false;
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        this.loading = false;
+
+        if (err.status === 401) {
+        this.error = 'Неверный логин или пароль';
+        } else {
+          this.error = 'Ошибка сервера. Попробуйте позже';
+        }
+
+        this.cdr.detectChanges(); 
       }
     });
   }

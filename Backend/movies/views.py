@@ -72,6 +72,7 @@ class ReviewListView(generics.ListAPIView):
         movie_id = self.request.query_params.get('movie_id')
         if movie_id:
             return Review.objects.filter(movie_id=movie_id).select_related('user')
+
         return Review.objects.none()
 
 class ReviewCreateView(generics.CreateAPIView):
@@ -80,3 +81,13 @@ class ReviewCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+
+class TestAuthView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({"message": "You are authorized"})

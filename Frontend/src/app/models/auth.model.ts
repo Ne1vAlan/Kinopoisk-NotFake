@@ -1,16 +1,14 @@
-// Yerdaulet's part
 export interface LoginRequest {
-  username: string;
-  password: string;
+    username: string;
+    password: string;
 }
 
 export interface RegisterRequest {
-  username: string;
-  password: string;
+    username: string;
+    password: string;
 }
 
 export interface AuthResponse {
-  token: string;
-  username: string;
-  message: string;
+    access: string;
+    refresh: string;
 }
