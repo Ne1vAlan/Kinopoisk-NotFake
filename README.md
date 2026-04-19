@@ -41,10 +41,28 @@ Kinopoisk-NotFake/
 │
 ├── Frontend/
 │   └── src/app/
-│           ├── login/
+│           ├── components/
+│           │   ├── movie-card/
+│           │   └── navbar/
+│           ├── guards/
+│           │   └── auth.guard.ts
+│           ├── interceptors/
+│           │   └── auth.interceptor.ts
+│           ├── models/
+│           │   ├── auth.models.ts
+│           │   └── movie.model.ts
+│           ├── pages/
+│           │   ├── home/
+│           │   ├── login/
+│           │   ├── movie-detail/
+│           │   ├── profile/
+│           │   └── register/
+│           └── services/
+│               ├── auth.service.ts
+│               ├── auth.spec.ts
+│               └── movie.service.ts
 │
-│
-│
+├── .gitignore
 └── README.md
 ```
 

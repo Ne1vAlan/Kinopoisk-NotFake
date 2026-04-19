@@ -28,12 +28,12 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/register/register').then(m => m.Register)
     },
     {
-        path: '**',
-        redirectTo: 'home'
-    },
-    {
         path: 'profile',
         loadComponent: () => import('./pages/profile/profile').then(m => m.ProfileComponent),
         canActivate: [authGuard]
-    }
+    },
+    {
+        path: '**',
+        redirectTo: 'home'
+    },
 ];
