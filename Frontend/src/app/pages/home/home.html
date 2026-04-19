@@ -1,5 +1,41 @@
 <!-- Yerdaulet's part -->
 <div class="home-page">
+  <div class="create-form"> <!-- Yegor -->
+    <h2>Add Movie</h2> <!-- Yegor -->
+
+    <input
+      type="text"
+      placeholder="Title"
+      [(ngModel)]="newMovie.title"
+    /> <!-- Yegor -->
+
+    <textarea
+      placeholder="Description"
+      [(ngModel)]="newMovie.description"
+    ></textarea> <!-- Yegor -->
+
+    <input
+      type="number"
+      placeholder="Year"
+      [(ngModel)]="newMovie.year"
+    /> <!-- Yegor -->
+
+    <select [(ngModel)]="newMovie.genre"> <!-- Yegor -->
+      <option [ngValue]="null">Select genre</option> <!-- Yegor -->
+      <option *ngFor="let genre of genres" [ngValue]="genre.id">
+        {{ genre.name }}
+      </option>
+    </select>
+
+    <input
+      type="file"
+      accept="video/*"
+      (change)="onVideoSelected($event)"
+    /> <!-- Yegor -->
+
+    <button (click)="createMovie()">Add Movie</button> <!-- Yegor -->
+  </div>
+
   <div class="search-bar">
     <input
       type="text"
@@ -17,7 +53,8 @@
   <div class="movies-grid" *ngIf="!loading && filteredMovies.length > 0">
     <app-movie-card
       *ngFor="let movie of filteredMovies"
-      [movie]="movie">
+      [movie]="movie"
+      (delete)="deleteMovie($event)">
     </app-movie-card>
   </div>
 </div>

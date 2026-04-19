@@ -33,4 +33,16 @@ export class MovieService {
       rating
     });
   }
+  // Yegor
+    deleteMovie(id: number): Observable<any> {
+      return this.http.delete(`${API}/movies/${id}/`);
+  }
+
+    createMovie(formData: FormData): Observable<Movie> {
+      return this.http.post<Movie>(`${API}/movies/`, formData);
+  }
+
+    updateMovie(id: number, formData: FormData): Observable<Movie> {
+      return this.http.put<Movie>(`${API}/movies/${id}/`, formData);
+  }
 }

@@ -1,0 +1,15 @@
+/* Yegor */
+.movie-video-block {
+  margin: 20px 0;
+}
+
+.movie-video {
+  width: 100%;
+  max-width: 720px;
+  border-radius: 10px;
+  display: block;
+}
+
+.video-link {
+  margin-top: 10px;
+}

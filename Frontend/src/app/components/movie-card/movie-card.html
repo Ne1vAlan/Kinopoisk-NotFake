@@ -1,11 +1,15 @@
 <!-- Yerdaulet's part -->
 <div class="movie-card" [routerLink]="['/movie', movie.id]">
   <div class="card-header">
-    <span class="genre-badge">{{ movie.genre?.name || 'Без жанра' }}</span>
+<span class="genre-badge">{{ getGenreName() }}</span> <!-- Yegor -->
     <span class="rating" *ngIf="getAvgRating() > 0">⭐ {{ getAvgRating() }}</span>
   </div>
   <h3 class="title">{{ movie.title }}</h3>
   <p class="year">{{ movie.year }}</p>
   <p class="description">{{ movie.description | slice:0:120 }}...</p>
   <span class="reviews-count">{{ movie.reviews?.length || 0 }} отзывов</span>
+
+  <div class="card-actions"> <!-- Yegor -->
+    <button class="delete-btn" (click)="onDelete($event)">Delete</button> <!-- Yegor -->
+  </div> <!-- Yegor -->
 </div>

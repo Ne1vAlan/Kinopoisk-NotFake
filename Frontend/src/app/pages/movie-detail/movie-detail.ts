@@ -60,7 +60,11 @@ export class MovieDetailComponent implements OnInit {
     const sum = this.reviews.reduce((acc, r) => acc + r.rating, 0);
     return Math.round((sum / this.reviews.length) * 10) / 10;
   }
-
+  getGenreName(): string { // Yegor
+    if (!this.movie || !this.movie.genre) return 'Без жанра'; // Yegor
+    if (typeof this.movie.genre === 'object') return this.movie.genre.name; // Yegor
+    return 'Жанр'; // Yegor
+  } // Yegor
   submitReview(): void {
     if (!this.reviewText.trim()) {
       this.reviewError = 'Напишите текст отзыва';

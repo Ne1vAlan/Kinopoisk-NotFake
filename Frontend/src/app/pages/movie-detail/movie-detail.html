@@ -4,9 +4,21 @@
 <div *ngIf="!loading && movie">
   <h1>{{ movie.title }}</h1>
   <p>Год: {{ movie.year }}</p>
-  <p>Жанр: {{ movie.genre?.name }}</p>
+  <p>Жанр: {{ getGenreName() }}</p> <!-- Yegor -->
   <p>{{ movie.description }}</p>
   <p>Средний рейтинг: {{ getAvgRating() }} / 10</p>
+  <div *ngIf="movie?.video" class="movie-video-block"> <!-- Yegor -->
+  <h3>Трейлер / Видео</h3> <!-- Yegor -->
+
+  <video class="movie-video" controls preload="metadata"> <!-- Yegor -->
+    <source [src]="movie.video" type="video/mp4"> <!-- Yegor -->
+    Ваш браузер не поддерживает видео. <!-- Yegor -->
+  </video> <!-- Yegor -->
+
+  <p class="video-link"> <!-- Yegor -->
+    <a [href]="movie.video" target="_blank">Открыть видео отдельно</a> <!-- Yegor -->
+  </p> <!-- Yegor -->
+</div>
 
   <h2>Отзывы ({{ reviews.length }})</h2>
 

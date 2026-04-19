@@ -13,7 +13,8 @@ class Movie(models.Model):
     description = models.TextField()
     year = models.IntegerField()
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, related_name='movies')
-
+    #added video - Yegor
+    video = models.FileField(upload_to='movies/videos/', blank=True, null=True)
     def __str__(self):
         return self.title
 

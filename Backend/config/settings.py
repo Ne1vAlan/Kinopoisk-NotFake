@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
     'rest_framework',
     'corsheaders',
     'movies',
@@ -114,10 +114,18 @@ INSTALLED_APPS += ['rest_framework.authtoken']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',  # Changed by Yegor
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # Changed by Yegor
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',  
+        'rest_framework.renderers.BrowsableAPIRenderer',
     ]
 }
+
+## Yegors
+
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

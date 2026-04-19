@@ -18,6 +18,9 @@ export interface Movie {
   title: string;
   description: string;
   year: number;
-  genre?: Genre;
+  // changed by Yegor
+  genre?: number | Genre | null;
   reviews?: Review[];
+  // added by Yegor 
+  video?: string | null;
 }

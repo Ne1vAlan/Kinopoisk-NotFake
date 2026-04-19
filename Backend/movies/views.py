@@ -3,11 +3,20 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework import generics
+from rest_framework import generics, status  # Changed by Yegor
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
-from rest_framework import status
-from .serializers import RegisterSerializer
+from rest_framework.parsers import MultiPartParser, FormParser  # Yegor
+
+from .serializers import (
+    RegisterSerializer,
+    MovieSerializer,
+    GenreModelSerializer,
+    ReviewModelSerializer,
+    ReviewCreateSerializer
+)  # Changed by Yegor
+from .models import Movie, Genre, Review  # Changed by Yegor
+
 
 class RegisterView(APIView):
     permission_classes = [AllowAny]
@@ -19,6 +28,7 @@ class RegisterView(APIView):
             token, _ = Token.objects.get_or_create(user=user)
             return Response({'token': token.key, 'username': user.username, 'message': 'User created'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
@@ -32,6 +42,7 @@ class LoginView(APIView):
         token, _ = Token.objects.get_or_create(user=user)
         return Response({'token': token.key, 'username': user.username, 'message': 'Login successful'})
 
+
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -39,30 +50,26 @@ class LogoutView(APIView):
         Token.objects.filter(user=request.user).delete()
         return Response({'message': 'Logout successful'})
 
+
 #Yegors
-#from rest_framework import generics
-from .models import Movie
-from .serializers import MovieSerializer
-
-
 class MovieListCreateView(generics.ListCreateAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
+    parser_classes = [MultiPartParser, FormParser]  # Yegor
 
 
 class MovieDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
+    parser_classes = [MultiPartParser, FormParser]  # Yegor
 
 
 #Yerdaulet's part
-from .models import Genre, Review
-from .serializers import GenreModelSerializer, ReviewModelSerializer, ReviewCreateSerializer
-
 class GenreListView(generics.ListAPIView):
     queryset = Genre.objects.all().order_by('name')
     serializer_class = GenreModelSerializer
     permission_classes = [AllowAny]
+
 
 class ReviewListView(generics.ListAPIView):
     serializer_class = ReviewModelSerializer
@@ -75,6 +82,7 @@ class ReviewListView(generics.ListAPIView):
 
         return Review.objects.none()
 
+
 class ReviewCreateView(generics.CreateAPIView):
     serializer_class = ReviewCreateSerializer
     permission_classes = [IsAuthenticated]
@@ -82,9 +90,6 @@ class ReviewCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
 
 class TestAuthView(APIView):
     permission_classes = [IsAuthenticated]

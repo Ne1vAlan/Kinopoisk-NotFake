@@ -1,6 +1,7 @@
 #Alans part
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from .models import Movie, Genre, Review  # Changed by Yegor
 
 # -------- Check --------
 class RegisterSerializer(serializers.ModelSerializer):
@@ -16,19 +17,12 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 #Yegors part
-from .models import Movie
-#from rest_framework import serializers
-
-# -------- MOVIES --------
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = '__all__'
 
-
 #Yerdaulet's part
-from .models import Genre, Review
-
 class GenreModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
