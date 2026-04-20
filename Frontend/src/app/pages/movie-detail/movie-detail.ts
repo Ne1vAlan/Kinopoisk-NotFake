@@ -47,6 +47,19 @@ export class MovieDetailComponent implements OnInit {
                 this.cdr.detectChanges();
             }
         });
+        
+        // Fetch genres independently
+        this.movieService.getGenres().subscribe({
+            next: (genres) => {
+                if (typeof this.movie!.genre === 'number') {
+                    const genreObj = genres.find(g => g.id === this.movie!.genre);
+                    if (genreObj) {
+                        this.movie!.genre = genreObj;
+                        this.cdr.detectChanges();
+                    }
+                }
+            }
+        });
       },
       error: () => {
         this.loading = false;

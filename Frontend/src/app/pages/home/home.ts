@@ -45,6 +45,7 @@ export class Home implements OnInit {
       next: (data) => {
         this.movies = data;
         this.filteredMovies = data;
+        this.mapGenres();
         this.loading = false;
         this.cdr.detectChanges();
       },
@@ -56,10 +57,22 @@ export class Home implements OnInit {
     });
   }
 
+  mapGenres(): void {
+    if (this.genres.length > 0 && this.movies.length > 0) {
+      const genreMap = new Map(this.genres.map(g => [g.id, g]));
+      this.movies.forEach(m => {
+        if (typeof m.genre === 'number') {
+          m.genre = genreMap.get(m.genre) || m.genre;
+        }
+      });
+    }
+  }
+
   loadGenres(): void { // Yegor
     this.movieService.getGenres().subscribe({
       next: (data) => {
         this.genres = data;
+        this.mapGenres();
         this.cdr.detectChanges();
       },
       error: (err) => {
@@ -120,6 +133,7 @@ export class Home implements OnInit {
       next: (createdMovie) => {
         this.movies = [createdMovie, ...this.movies];
         this.filteredMovies = [createdMovie, ...this.filteredMovies];
+        this.mapGenres();
 
         this.newMovie = {
           title: '',
